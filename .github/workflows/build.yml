@@ -1,30 +1,24 @@
-name: Generate Final APK
+name: Build Nexus App
 on:
   push:
     branches: [ main ]
   workflow_dispatch:
 jobs:
-  build:
+  android-build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Python
+      - name: Install Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-      - name: Install
-        run: pip install requests
-      - name: Run AI
-        env:
-          GROQ_API_KEY: ${{ secrets.LLAMA_API_KEY }}
-        run: python main.py
-      - name: Build Android App
+      - name: Build APK
         uses: ArtemSerebriakov/buildozer-action@v1
         with:
           command: buildozer android debug
           repository_root: .
-      - name: Upload APK
+      - name: Download APK
         uses: actions/upload-artifact@v3
         with:
-          name: Mufadul-App
+          name: My-AI-App
           path: bin/*.apk
