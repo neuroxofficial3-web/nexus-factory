@@ -1,0 +1,30 @@
+name: Generate Final APK
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+      - name: Install
+        run: pip install requests
+      - name: Run AI
+        env:
+          GROQ_API_KEY: ${{ secrets.LLAMA_API_KEY }}
+        run: python main.py
+      - name: Build Android App
+        uses: ArtemSerebriakov/buildozer-action@v1
+        with:
+          command: buildozer android debug
+          repository_root: .
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: Mufadul-App
+          path: bin/*.apk
