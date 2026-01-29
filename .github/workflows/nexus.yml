@@ -1,0 +1,11 @@
+name: Nexus Factory Engine
+on: [push]
+jobs:
+  check-connection:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Run Factory Controller
+        env:
+          LLAMA_API_KEY: ${{ secrets.LLAMA_API_KEY }}
+        run: python main.py
