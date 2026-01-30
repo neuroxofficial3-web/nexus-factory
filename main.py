@@ -1,9 +1,9 @@
 from kivy.app import App
 from kivy.uix.label import Label
 
-class NexusApp(App):
+class TestApp(App):
     def build(self):
-        return Label(text="Nexus AI - Mufadul Ajlan")
+        return Label(text="System Working - Mufadul")
 
 if __name__ == "__main__":
-    NexusApp().run()
+    TestApp().run()
