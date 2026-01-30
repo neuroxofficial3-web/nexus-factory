@@ -1,16 +1,9 @@
 [app]
-title = Nexus AI App
+title = Nexus AI
 package.name = nexusai
-package.domain = org.mufadul.nexus
+package.domain = org.mufadul
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,requests
+requirements = python3,kivy
 orientation = portrait
-fullscreen = 0
-android.archs = arm64-v8a, armeabi-v7a
-android.allow_backup = True
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
