@@ -1,13 +1,15 @@
-name: Build
+name: Test Build
 on: [push, workflow_dispatch]
 jobs:
-  apk:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Build
-        run: docker run --rm -v ${{ github.workspace }}:/home/buildozer/host kivy/buildozer android debug
+      - name: Build with Buildozer
+        uses: ArtemSerebriakov/buildozer-action@v1
+        with:
+          buildozer_version: master
       - uses: actions/upload-artifact@v4
         with:
-          name: app
+          name: my-apk
           path: bin/*.apk
