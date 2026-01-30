@@ -1,20 +1,16 @@
 name: Build APK
 on: [push, workflow_dispatch]
-
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Build with Buildozer
-        uses: Enteon/buildozer-action@v1.2.1
-        with:
-          buildozer_version: master
-
+      - uses: actions/checkout@v4
+      - name: Build with Docker
+        run: |
+          docker run --rm -v ${{ github.workspace }}:/home/buildozer/host kivy/buildozer --version
+          docker run --rm -v ${{ github.workspace }}:/home/buildozer/host kivy/buildozer android debug
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: package
+          name: my-app
           path: bin/*.apk
