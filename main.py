@@ -1,9 +1,9 @@
 from kivy.app import App
-from kivy.uix.button import Button
+from kivy.uix.label import Label
 
-class TestApp(App):
+class NexusApp(App):
     def build(self):
-        return Button(text="Success! Mufadul")
+        return Label(text="Nexus AI System Online")
 
 if __name__ == "__main__":
-    TestApp().run()
+    NexusApp().run()
